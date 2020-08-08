@@ -16,8 +16,14 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
+'''
+print(os.path.abspath(__file__))
+print(os.path.dirname(os.path.abspath(__file__)))
+print(BASE_DIR)
+'''
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "h#w^7m7nzi(e47a_e@-3cf5oie&$^lc%w6$ru5zh%z%g1zy9d-"
@@ -39,7 +45,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PARTY_APPS = ["django_countries"]
+THIRD_PARTY_APPS = ["django_countries", "django_seed"]
 
 PROJECT_APPS = [
     "core.apps.CoreConfig",
@@ -130,4 +136,9 @@ STATIC_URL = "/static/"
 AUTH_USER_MODEL = "users.User"
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads") 
+# 어디에다 우리가 업로드한 파일들을 써야 할지 말해주는 곳.    
+# BASE_DIR : /Users/kimjunhee/Desktop/web/airbnb-clone
+# MEDIA_ROOT : /Users/kimjunhee/Desktop/web/airbnb-clone/uploads
+
+MEDIA_URL = "/media/"

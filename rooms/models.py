@@ -93,6 +93,12 @@ class Room(core_models.TimeStampedModel):
 
     def __str__(self):
         return self.name
+    
+    def save(self, *args, **kwargs):
+        #self.beds = 1000
+        self.city = str.capitalize(self.city)
+        super().save(*args, **kwargs)
+        #joshua treehouse adminpanel에서 저장버튼누르면 된다.
 
     def total_rating(self):
         all_reviews = self.reviews.all()

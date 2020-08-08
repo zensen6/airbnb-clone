@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import mark_safe
 from . import models
 
 # Register your models here.
@@ -15,24 +16,28 @@ class ItemAdmin(admin.ModelAdmin):
         return obj.rooms.count()
 
 
+class PhotoInline(admin.TabularInline):
+    
+    model = models.Photo
+
+
 @admin.register(models.Room)
 class RoomAdmin(admin.ModelAdmin):
 
     """ Room Admin Definition """
 
+    inlines = (PhotoInline,)
+
     fieldsets = (
         (
             "Basic Info",
-            {"fields": ("name", "description", "country", "address", "price")},
+            {"fields": ("name", "description", "country", "city", "address", "price")},
         ),
         ("Times", {"fields": ("check_in", "check_out", "instant_book")}),
         ("Spaces", {"fields": ("guests", "beds", "bedrooms", "baths")}),
         (
             "More About the Space",
-            {
-                "classes": ("collapse",),
-                "fields": ("amenities", "facilities", "house_rules"),
-            },
+            {"fields": ("amenities", "facilities", "house_rules")},
         ),
         ("Last Details", {"fields": ("host",)}),
     )
@@ -67,6 +72,8 @@ class RoomAdmin(admin.ModelAdmin):
         "country",
     )
 
+    raw_id_fields = ("host",)
+
     search_fields = (
         "=city",
         "^host__username",
@@ -90,4 +97,16 @@ class PhotoAdmin(admin.ModelAdmin):
 
     """ """
 
-    pass
+    list_display = ('__str__', "get_thumbnail",)
+
+    def get_thumbnail(self, obj):
+        #print(obj.file)
+        #->room_photos/KakaoTalk_Image_2020-02-27-20-33-57.jpeg
+        #print(dir(obj.file))
+        #->속성들 나옴
+        #print(obj.file.url)
+        #->/media/room_photos/KakaoTalk_Image_2020-02-27-20-33-57.jpeg
+        return mark_safe(f"<img src='{obj.file.url}' width=50px;height=50px/>")
+        
+    get_thumbnail.short_description = "Thumbnail"
+    
