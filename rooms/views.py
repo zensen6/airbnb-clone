@@ -3,9 +3,12 @@ from math import ceil
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
+from django.urls import reverse
+from django.http import Http404
 from . import models
 # Create your views here.
+
 
 class HomeView(ListView):
 
@@ -17,9 +20,21 @@ class HomeView(ListView):
     paginate_orphans = 5
     context_object_name = "rooms"
 
+
+class RoomDetail(DetailView):
+
+    model = models.Room
+    
+
+'''
 def room_detail(request, pk):
 
-    return render(request, "rooms/detail.html")
+    try:
+        room = models.Room.objects.get(pk=pk)
+        return render(request, "rooms/detail.html", context={"room": room})
+    except models.Room.DoesNotExist:
+        raise Http404()
+'''
 
 '''
 def all_rooms(request):
