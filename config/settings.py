@@ -142,3 +142,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 # MEDIA_ROOT : /Users/kimjunhee/Desktop/web/airbnb-clone/uploads
 
 MEDIA_URL = "/media/"
+
+EMAIL_HOST = "smtp.mailgun.org" 
+
+EMAIL_PORT = "587"
+print(os.environ.get("MAILGUN_PASSWORD"))
+EMAIL_HOST_USER = os.environ.get("MAILGUN_USERNAME")
+
+EMAIL_HOST_PASSWORD = os.environ.get("MAILGUN_PASSWORD")
