@@ -143,10 +143,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 
 MEDIA_URL = "/media/"
 
+
 EMAIL_HOST = "smtp.mailgun.org" 
-
-EMAIL_PORT = "587"
-print(os.environ.get("MAILGUN_PASSWORD"))
+EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ.get("MAILGUN_USERNAME")
-
 EMAIL_HOST_PASSWORD = os.environ.get("MAILGUN_PASSWORD")
+print(os.environ.get("MAILGUN_USERNAME"), os.environ.get("MAILGUN_PASSWORD"))
+EMAIL_FROM = "sexy@sandbox6189f95f8c78474e88564874cd06149e.mailgun.org"
