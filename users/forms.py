@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from . import models
 
 class LoginForm(forms.Form):
@@ -55,11 +56,14 @@ class SignUpForm(forms.Form):
 
 '''
 
+
+
+'''
 class SignUpForm(forms.ModelForm):
     class Meta:
         model = models.User
         fields = ("first_name", "last_name", "email")
-    
+
     password = forms.CharField(widget = forms.PasswordInput)
     password1 = forms.CharField(widget = forms.PasswordInput, label="Confirm Password")
 
@@ -78,3 +82,7 @@ class SignUpForm(forms.ModelForm):
         user.username = email
         user.set_password(password)
         user.save()
+'''
+
+class SignUpForm(UserCreationForm):
+    username = forms.EmailField(label="Email")
