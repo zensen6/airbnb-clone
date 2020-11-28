@@ -58,7 +58,7 @@ class SignUpForm(forms.Form):
 
 
 
-'''
+
 class SignUpForm(forms.ModelForm):
     class Meta:
         model = models.User
@@ -82,7 +82,9 @@ class SignUpForm(forms.ModelForm):
         user.username = email
         user.set_password(password)
         user.save()
-'''
 
+
+'''
 class SignUpForm(UserCreationForm):
     username = forms.EmailField(label="Email")
+'''
