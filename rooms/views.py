@@ -3,7 +3,7 @@ from math import ceil
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import ListView, DetailView, View, UpdateView
 from django.urls import reverse
 from django.http import Http404
 from django_countries import countries
@@ -286,3 +286,28 @@ def all_rooms(request):
         "page_count": page_count
     })
 '''
+
+
+class EditRoomView(UpdateView):
+    
+    model = models.Room
+    template_name = "rooms/room_edit.html"
+    fields = (
+        "name",
+        "description",
+        "country",
+        "city",
+        "price",
+        "address",
+        "guests",
+        "beds",
+        "bedrooms",
+        "baths",
+        "check_in",
+        "check_out",
+        "instant_book",
+        "room_type",
+        "amenities",
+        "facilities",
+        "house_rules",
+    )
